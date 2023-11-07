@@ -23,7 +23,7 @@ crontab -e
 
 # Implemenation
 ## Architecture
-TODO
+![Architecture diagram of the project](/assets/Linux-Project-Arch.jpg)
 
 ## Scripts
 - **psql_docker.sh**: Manages the Docker container for PostgreSQL
