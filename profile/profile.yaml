@@ -1,0 +1,134 @@
+# Preferred name (Characters only)
+name: "Hargun Bedi"
+# Your GitHub repo root URL
+github_repo_root_url: https://github.com/jarviscanada/jarvis_data_eng_HargunBedi
+
+# Introduce yourself, your academic and professional background.
+# What excites you about the software industry and your passion. At least 80 words
+#TODO
+summary: "I am a recent Software Engineering graduate from McMaster University, currently working at Jarvis Consulting Group. My academic and professional journey is characterized by my passion for technology and problem-solving, and continuous learning which is evident in my various internships and projects. These experiences have enabled me to gain experience with full-stack web development, QA automation, cloud development, and machine learning.  Among my notable projects, I developed a scalable e-commerce website using a microservices architecture with technologies like Node/Express.js and AWS. Motivated by the practical experience I encountered through this project, I am also currently pursuing the AWS Associate Developer Certification to further deepen my understanding and in cloud-based solutions and technologies. In terms of my professional experience, during my internship as an Application Programmer, I significantly contributed to automated testing processes and played a vital role in ensuring efficient project delivery and my role at Develop For Good involved implementing revamped webpages for a non-profit website using React.js and MUI. These experiences reflect my adaptability, dedication, and desire to learn in contributing effectively to diverse software development environments."
+
+# Group your skills by level.
+# Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
+skills:
+  # At least 5 skills
+  proficient:
+    - Java
+    - JavaScript/TypeScript
+    - Linux/Bash
+    - RDBMS/SQL
+    - Agile/Scrum
+    - HTML/CSS
+    - Git
+  # At least 5 skills
+  competent:
+    - Python
+    - Docker
+    - React.js
+    - Node/Express
+    - Flask
+  # At least 5 skills
+  familiar:
+    - AWS
+    - MongoDB
+    - PostgreSQL
+    - MySQL
+    - Jenkins
+
+# List of Jarvis projects
+jarvis_projects:
+  - name: "Cluster Monitor"
+    git_url: "https://github.com/jarviscanada/jarvis_data_eng_HargunBedi/tree/master/linux_sql"
+    # The project description allows hiring managers to understand your project and technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    #TODO
+    description: "Developed a MVP for the Jarvis Linux Cluster Administration (LCA) team, enabling management of a cluster of multiple Linux servers. This project captures hardware specifications and real-time server usage, storing information in a PostgreSQL database for analytics and resource planning. Implemented bash scripts for data collection, utilized Docker for PostgreSQL setup, and used Git and GitHub for version control."
+  # - name: "Core Java Apps"
+  #   git_url: "/core_java"
+  #   description:
+  #     - "Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  #     - "JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  #     - "Grep App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  # - name: "Springboot App"
+  #   git_url: "/springboot"
+  #   description: ""
+  # - name: "Python Data Analytics"
+  #   git_url: "/python_data_anlytics"
+  #   description: ""
+  # - name: "Hadoop"
+  #   git_url: "/hadoop"
+  #   description: ""
+  # - name: "Spark"
+  #   git_url: "/spark"
+  #   description: ""
+  # - name: "Cloud/DevOps"
+  #   git_url: "/cloud_devops"
+  #   description: ""
+
+# List of personal or academic projects
+# Feel free to add more projects
+highlighted_projects:
+    #project name
+  - name: "AZ-Shopping"
+    #URL is optional
+    git_url: "https://github.com/Hargun22/AZ-Shopping-Microservices"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "Developed a scalable e-commerce website employing micro-services architecture and various technologies including Node/Express.JS, MongoDB, PostgreSQL, and React. Implemented AWS S3 for image storage, used Docker for deployment on Beanstalk, and established a CI pipeline with Jenkins on an EC2 instance."
+  - name: "Indeed Keyword Scraper"
+    git_url: "https://github.com/Hargun22/Indeed-Scraper"
+    description: "Developed a web scraper that scrapes Indeed for jobs matching a job title, location and keywords present. Leveraged Python and BeautifulSoup for extracting and transforming the scraped the data. Developed a front-end to gather input and display results using React.js and TypeScript. Developed an API using Flask to facilitate communication between the front-end and back-end."
+  - name: "Waste Segregation Classifier"
+    git_url: "https://github.com/Hargun22/Waste-Segregation"
+    description: "Deployed a Convolutional Neural Network model based on the ResNet50 image classification architecture to help users segregate waste into appropriate bins, using PyTorch. Developed a front-end to gather input and display results using React.js. Deployed the model through a Flask-based API running on a Docker container."
+
+#List of professional experience
+#The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+#The description must be more than 25 words. If your experience is not software related, please focus on soft skills and achievements (e.g. team collaboration, problem-solving, improvements, communication).
+professional_experience:
+  #Write your Jarvis role as a professional experience rather than training.
+  - title: "Software Developer"
+    company: "Jarvis"
+    duration: "Oct 2023 - present"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    #TODO
+    description: "Developed software solutions for internal use and external clients. Engaged regularly with a dynamic team through daily stand-ups, synchronized on progress, and provided mutual support. Collaborated within a team that was rooted in continuous improvement, emphasized through frequent code reviews, skills assessments, and knowledge sharing."
+  - title: "Software Engineer"
+    company: "Develop For Good"
+    duration: "Jun 2023 - Aug 2023"
+    description: "Revamped a not-for-profit organization's website for enhanced visual appeal using React.js and Material UI, and implemented a newsletter feature using a MySQL database and a REST API in Node.js/Express.js."
+  - title: "Application Programmer Intern"
+    company: "Ontario Ministry of Education"
+    duration: "May 2021 - Aug 2022"
+    description: "Developed efficient VBScript-based automated testing scripts specifically for Ontario's Program Approval & Registration Information System. I optimized Smoke and Regression test report generation which led to faster reporting of critical bugs. I also used SQL queries to manipulate data, creating robust test data sets for more accurate and comprehensive testing. Additionally, I was an active participant in daily stand-up meetings and adhered to Agile methodologies to ensure the smooth delivery of projects."
+  - title: "Data Analyst"
+    company: "Inergi LP"
+    duration: "Jun 2019 - Aug 2019"
+    description: "Led the automation of supplier data validation using Python, achieving a 50% improvement in process efficiency, significantly saving time and resources."
+
+#List of edcuation
+education: 
+  - school_name: "McMaster University"
+    duration: "2018 - 2023"
+    degree: "Bachelor of Engineering"
+    department: "Software Engineering"
+    # optional
+    awards_achievements: 
+      - "Summa Cum Laude"
+      - "2x Dean's List"
+      - "GPA: 3.8/4.0"
+
+#Optional section
+others:
+  #   #category
+  # - title: "Certificates"
+  #   #list of items
+  #   bullets:
+  #     - "Udacity Machine Learning (2019)"
+  # - title: "Awards"
+  #   bullets:
+  #     - "Winner"
+  - title: "Hobbies"
+    bullets:
+      - "Playing/watching Basketball - My favourite teams are Toronto Raptors and Los Angeles Lakers. My favourite player is LeBron James."
+      - "Photography - I like nature and street photography"
+      - "Working out at the gym - I primarily do strength training"
