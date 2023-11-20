@@ -6,7 +6,7 @@ github_repo_root_url: https://github.com/jarviscanada/jarvis_data_eng_HargunBedi
 # Introduce yourself, your academic and professional background.
 # What excites you about the software industry and your passion. At least 80 words
 #TODO
-summary: "I am a recent Software Engineering graduate from McMaster University. Currently, I am working for Jarvis Consulting Group. Prior to joining Jarvis, I have completed a few internships and projects that have helped me to gain experience with full-stack web development, qa automation, cloud development and machine learning. I chose software engineering because it combines my interests in problem-solving, technology, and continuous learning. I have always loved seeing how complex problems are often broken down into smaller ones and then solved in a very structured and reasoned way. It is one of the few fields where you constantly need to improve yourself and keep learning, presenting an unique challenge."
+summary: "I am a recent Software Engineering graduate from McMaster University, currently working at Jarvis Consulting Group. My academic and professional journey is characterized by my passion for technology and problem-solving, and continuous learning which is evident in my various internships and projects. These experiences have enabled me to gain experience with full-stack web development, QA automation, cloud development, and machine learning.  Among my notable projects, I developed a scalable e-commerce website using a microservices architecture with technologies like Node/Express.js and AWS. Motivated by the practical experience I encountered through this project, I am also currently pursuing the AWS Associate Developer Certification to further deepen my understanding and in cloud-based solutions and technologies. In terms of my professional experience, during my internship as an Application Programmer, I significantly contributed to automated testing processes and played a vital role in ensuring efficient project delivery and my role at Develop For Good involved implementing revamped webpages for a non-profit website using React.js and MUI. These experiences reflect my adaptability, dedication, and desire to learn in contributing effectively to diverse software development environments."
 
 # Group your skills by level.
 # Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
@@ -76,10 +76,10 @@ highlighted_projects:
     description: "Developed a scalable e-commerce website employing micro-services architecture and various technologies including Node/Express.JS, MongoDB, PostgreSQL, and React. Implemented AWS S3 for image storage, used Docker for deployment on Beanstalk, and established a CI pipeline with Jenkins on an EC2 instance."
   - name: "Indeed Keyword Scraper"
     git_url: "https://github.com/Hargun22/Indeed-Scraper"
-    description: "Developed a web scraper that scrapes Indeed for jobs matching a job title, location and keywords present. Leverage Python, BeautifulSoup, Flask, Typescript, and React."
+    description: "Developed a web scraper that scrapes Indeed for jobs matching a job title, location and keywords present. Leveraged Python and BeautifulSoup for extracting and transforming the scraped the data. Developed a front-end to gather input and display results using React.js and TypeScript. Developed an API using Flask to facilitate communication between the front-end and back-end."
   - name: "Waste Segregation Classifier"
     git_url: "https://github.com/Hargun22/Waste-Segregation"
-    description: "Deployed a Convolutional Neural Network model based on the ResNet50 image classification architecture to help users segregate waste into appropriate bins. Leveraged Python, PyTorch, Flask, React, and Docker."
+    description: "Deployed a Convolutional Neural Network model based on the ResNet50 image classification architecture to help users segregate waste into appropriate bins, using PyTorch. Developed a front-end to gather input and display results using React.js. Deployed the model through a Flask-based API running on a Docker container."
 
 #List of professional experience
 #The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
@@ -100,6 +100,11 @@ professional_experience:
     company: "Ontario Ministry of Education"
     duration: "May 2021 - Aug 2022"
     description: "Developed efficient VBScript-based automated testing scripts specifically for Ontario's Program Approval & Registration Information System. I optimized Smoke and Regression test report generation which led to faster reporting of critical bugs. I also used SQL queries to manipulate data, creating robust test data sets for more accurate and comprehensive testing. Additionally, I was an active participant in daily stand-up meetings and adhered to Agile methodologies to ensure the smooth delivery of projects."
+  - title: "Data Analyst"
+    company: "Inergi LP"
+    duration: "Jun 2019 - Aug 2019"
+    description: "Led the automation of supplier data validation using Python, achieving a 50% improvement in process efficiency, significantly saving time and resources."
+
 #List of edcuation
 education: 
   - school_name: "McMaster University"
@@ -124,6 +129,6 @@ others:
   #     - "Winner"
   - title: "Hobbies"
     bullets:
-      - "Playing/watching Basketball"
-      - "Photography"
-      - "Working out at the gym"
+      - "Playing/watching Basketball - My favourite teams are Toronto Raptors and Los Angeles Lakers. My favourite player is LeBron James."
+      - "Photography - I like nature and street photography"
+      - "Working out at the gym - I primarily do strength training"
