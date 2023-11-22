@@ -172,6 +172,80 @@ ORDER BY member;
 ```
 
 ##### Aggregates Section
+###### Question 1
+```sql
+SELECT recommendedby, count(*)
+FROM cd.members
+WHERE recommendedby IS NOT NULL
+GROUP BY recommendedby
+ORDER BY recommendedby ASC;
+```
+
+###### Question 2
+```sql
+SELECT facid, SUM(slots) as "Total Slots"
+FROM cd.bookings
+GROUP BY facid
+ORDER BY facid;    
+```
+
+###### Question 3
+```sql
+SELECT facid, SUM(slots) as "Total Slots"
+FROM cd.bookings
+WHERE starttime >= '2012-09-01' AND starttime < '2012-10-01'
+GROUP BY facid
+ORDER BY "Total Slots";    
+```
+
+###### Question 4
+```sql
+SELECT facid, EXTRACT(month from starttime) as month, SUM(slots) as "Total Slots"
+FROM cd.bookings
+WHERE EXTRACT(year from starttime) = 2012
+GROUP BY facid, month
+ORDER BY facid, month;
+```
+
+###### Question 5
+```sql
+SELECT count(distinct memid) from cd.bookings;
+```
+
+###### Question 6
+```sql
+SELECT mem.surname, mem.firstname, mem.memid, min(bks.starttime) as starttime
+FROM cd.members as mem
+JOIN cd.bookings as bks
+ON mem.memid = bks.memid
+WHERE starttime >= '2012-09-01'
+GROUP by mem.surname, mem.firstname, mem.memid
+ORDER BY mem.memid;
+```
+
+###### Question 7
+```sql
+SELECT COUNT(*) over(), firstname, surname
+FROM cd.members
+ORDER BY joindate;
+```
+
+###### Question 8
+```sql
+SELECT row_number() over(), firstname, surname
+FROM cd.members
+ORDER BY joindate;
+```
+
+###### Question 9
+```sql
+SELECT facid, total FROM (
+  SELECT facid, sum(slots) total, rank() over (ORDER BY sum(slots) DESC) rank
+  from cd.bookings
+  GROUP BY facid
+) as ranked
+WHERE rank = 1; 
+```
 
 
 ##### String Section
