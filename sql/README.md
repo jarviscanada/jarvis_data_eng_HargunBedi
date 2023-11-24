@@ -1,4 +1,5 @@
 # Introduction
+This project contains queries that were created to solve questions derived from https://pgexercises.com/questions/basic/. The PostgreSQL database contains 3 tables: members, facilities and bookings. The solution to the queries and the table setup queries can be found below. The PostgreSQL database runs in a Docker container and it was used to run and test the queries. Github was used for version control.
 
 # SQL Quries
 
@@ -49,23 +50,23 @@ CREATE TABLE cd.members
     );
 ```
 ##### Modifiying Data Section
-###### Question 1
+###### [Question 1](https://pgexercises.com/questions/updates/insert.html)
 ```sql
 INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, monthlymaintenance) VALUES (9, 'Spa', 20, 30, 100000, 800);
 ```
 
-###### Questions 2
+###### [Questions 2](https://pgexercises.com/questions/updates/insert3.html)
 ```sql
 insert into cd.facilities
     (facid, name, membercost, guestcost, initialoutlay, monthlymaintenance) SELECT (SELECT max(facid) from cd.facilities)+1, 'Spa', 20, 30, 100000, 800; 
 ```
 
-###### Question 3
+###### [Question 3](https://pgexercises.com/questions/updates/update.html)
 ```sql
 UPDATE cd.facilities SET initialoutlay = 10000 WHERE facid = 1;
 ```
 
-###### Question 4
+###### [Question 4](https://pgexercises.com/questions/updates/updatecalculated.html)
 ```sql
 UPDATE cd.facilities
 SET 
@@ -74,46 +75,46 @@ SET
 WHERE facid = 1;
 ```
 
-###### Question 5
+###### [Question 5](https://pgexercises.com/questions/updates/delete.html)
 ```sql
 DELETE FROM cd.bookings;
 ```
 
-###### Question 6
+###### [Question 6](https://pgexercises.com/questions/updates/deletewh.html)
 ```sql
 DELETE FROM cd.members WHERE memid = 37;
 ```
 
 ##### Basics Section
-###### Question 1
+###### [Question 1](https://pgexercises.com/questions/basic/where2.html)
 ```sql
 SELECT facid, name, membercost, monthlymaintenance
 FROM cd.facilities
 WHERE membercost > 0 AND membercost < monthlymaintenance/50;
 ```
 
-###### Question 2
+###### [Question 2](https://pgexercises.com/questions/basic/where3.html)
 ```sql
 SELECT *
 FROM cd.facilities
 WHERE name LIKE '%Tennis%';
 ```
 
-###### Question 3
+###### [Question 3](https://pgexercises.com/questions/basic/where4.html)
 ```sql
 SELECT *
 FROM cd.facilities
 WHERE facid IN (1, 5);
 ```
 
-###### Question 4
+###### [Question 4](https://pgexercises.com/questions/basic/date.html)
 ```sql
 SELECT memid, surname, firstname, joindate
 FROM cd.members
 WHERE joindate >= '2012-09-01';
 ```
 
-###### Question 5
+###### [Question 5](https://pgexercises.com/questions/basic/union.html)
 ```sql
 SELECT surname
 FROM cd.members
@@ -124,7 +125,7 @@ FROM cd.facilities;
 
 
 ##### Join Section
-###### Question 1
+###### [Question 1](https://pgexercises.com/questions/joins/simplejoin.html)
 ```sql
 SELECT starttime
 FROM cd.bookings
@@ -133,7 +134,7 @@ ON cd.members.memid = cd.bookings.memid
 WHERE cd.members.firstname = 'David' AND cd.members.surname = 'Farrell';
 ```
 
-###### Question 2
+###### [Question 2](https://pgexercises.com/questions/joins/simplejoin2.html)
 ```sql
 SELECT bks.starttime as start, facs.name as name
 FROM cd.bookings as bks
@@ -143,7 +144,7 @@ WHERE facs.name in ('Tennis Court 2','Tennis Court 1') AND bks.starttime >= '201
 ORDER BY bks.starttime;
 ```
 
-###### Question 3
+###### [Question 3](https://pgexercises.com/questions/joins/self2.html)
 ```sql
 SELECT mem.firstname as memfname, mem.surname as memsname, ref.firstname as recfname, ref.surname as recsname
 FROM cd.members as mem
@@ -152,7 +153,7 @@ ON ref.memid = mem.recommendedby
 ORDER BY memsname, memfname;
 ```
 
-###### Question 4
+###### [Question 4](https://pgexercises.com/questions/joins/self.html)
 ```sql
 SELECT DISTINCT ref.firstname as firstname, ref.surname as surname
 FROM cd.members as ref
@@ -161,7 +162,7 @@ ON ref.memid = mem.recommendedby
 ORDER BY surname, firstname;
 ```
 
-###### Question 5
+###### [Question 5](https://pgexercises.com/questions/joins/sub.html)
 ```sql
 SELECT DISTINCT mems.firstname || ' ' || mems.surname as member,
 (SELECT recs.firstname || ' ' || recs.surname as recommender
@@ -172,7 +173,7 @@ ORDER BY member;
 ```
 
 ##### Aggregates Section
-###### Question 1
+###### [Question 1](https://pgexercises.com/questions/aggregates/count3.html)
 ```sql
 SELECT recommendedby, count(*)
 FROM cd.members
@@ -181,7 +182,7 @@ GROUP BY recommendedby
 ORDER BY recommendedby ASC;
 ```
 
-###### Question 2
+###### [Question 2](https://pgexercises.com/questions/aggregates/fachours.html)
 ```sql
 SELECT facid, SUM(slots) as "Total Slots"
 FROM cd.bookings
@@ -189,7 +190,7 @@ GROUP BY facid
 ORDER BY facid;    
 ```
 
-###### Question 3
+###### [Question 3](https://pgexercises.com/questions/aggregates/fachoursbymonth.html)
 ```sql
 SELECT facid, SUM(slots) as "Total Slots"
 FROM cd.bookings
@@ -198,7 +199,7 @@ GROUP BY facid
 ORDER BY "Total Slots";    
 ```
 
-###### Question 4
+###### [Question 4](https://pgexercises.com/questions/aggregates/fachoursbymonth2.html)
 ```sql
 SELECT facid, EXTRACT(month from starttime) as month, SUM(slots) as "Total Slots"
 FROM cd.bookings
@@ -207,12 +208,12 @@ GROUP BY facid, month
 ORDER BY facid, month;
 ```
 
-###### Question 5
+###### [Question 5](https://pgexercises.com/questions/aggregates/members1.html)
 ```sql
 SELECT count(distinct memid) from cd.bookings;
 ```
 
-###### Question 6
+###### [Question 6](https://pgexercises.com/questions/aggregates/nbooking.html)
 ```sql
 SELECT mem.surname, mem.firstname, mem.memid, min(bks.starttime) as starttime
 FROM cd.members as mem
@@ -223,21 +224,21 @@ GROUP by mem.surname, mem.firstname, mem.memid
 ORDER BY mem.memid;
 ```
 
-###### Question 7
+###### [Question 7](https://pgexercises.com/questions/aggregates/countmembers.html)
 ```sql
 SELECT COUNT(*) over(), firstname, surname
 FROM cd.members
 ORDER BY joindate;
 ```
 
-###### Question 8
+###### [Question 8](https://pgexercises.com/questions/aggregates/nummembers.html)
 ```sql
 SELECT row_number() over(), firstname, surname
 FROM cd.members
 ORDER BY joindate;
 ```
 
-###### Question 9
+###### [Question 9](https://pgexercises.com/questions/aggregates/fachours4.html)
 ```sql
 SELECT facid, total FROM (
   SELECT facid, sum(slots) total, rank() over (ORDER BY sum(slots) DESC) rank
@@ -249,17 +250,17 @@ WHERE rank = 1;
 
 
 ##### String Section
-###### Question 1
+###### [Question 1](https://pgexercises.com/questions/string/concat.html)
 ```sql
 SELECT surname || ', ' || firstname as name FROM cd.members;
 ```
 
-###### Question 2
+###### [Question 2](https://pgexercises.com/questions/string/reg.html)
 ```sql
 SELECT memid, telephone from cd.members where telephone ~ '[()]';
 ```
 
-###### Question 3
+###### [Question 3](https://pgexercises.com/questions/string/substr.html)
 ```sql
 SELECT substr(mems.surname, 1, 1) as letter, count(*) as count
 FROM cd.members as mems
