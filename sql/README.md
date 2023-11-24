@@ -1,0 +1,269 @@
+# Introduction
+This project contains queries that were created to solve questions derived from https://pgexercises.com/questions/basic/. The PostgreSQL database contains 3 tables: members, facilities and bookings. The solution to the queries and the table setup queries can be found below. The PostgreSQL database runs in a Docker container and it was used to run and test the queries. Github was used for version control.
+
+# SQL Quries
+
+###### Table Setup (DDL)
+##### Members Table
+```
+CREATE TABLE cd.members
+    (
+       memid integer NOT NULL, 
+       surname character varying(200) NOT NULL, 
+       firstname character varying(200) NOT NULL, 
+       address character varying(300) NOT NULL, 
+       zipcode integer NOT NULL, 
+       telephone character varying(20) NOT NULL, 
+       recommendedby integer,
+       joindate timestamp NOT NULL,
+       CONSTRAINT members_pk PRIMARY KEY (memid),
+       CONSTRAINT fk_members_recommendedby FOREIGN KEY (recommendedby)
+            REFERENCES cd.members(memid) ON DELETE SET NULL
+    );
+```
+##### Facilities Table
+```
+ CREATE TABLE cd.facilities
+    (
+       facid integer NOT NULL, 
+       name character varying(100) NOT NULL, 
+       membercost numeric NOT NULL, 
+       guestcost numeric NOT NULL, 
+       initialoutlay numeric NOT NULL, 
+       monthlymaintenance numeric NOT NULL, 
+       CONSTRAINT facilities_pk PRIMARY KEY (facid)
+    );
+```
+
+##### Bookings Table
+```
+ CREATE TABLE cd.bookings
+    (
+       bookid integer NOT NULL, 
+       facid integer NOT NULL, 
+       memid integer NOT NULL, 
+       starttime timestamp NOT NULL,
+       slots integer NOT NULL,
+       CONSTRAINT bookings_pk PRIMARY KEY (bookid),
+       CONSTRAINT fk_bookings_facid FOREIGN KEY (facid) REFERENCES cd.facilities(facid),
+       CONSTRAINT fk_bookings_memid FOREIGN KEY (memid) REFERENCES cd.members(memid)
+    );
+```
+##### Modifiying Data Section
+###### [Question 1](https://pgexercises.com/questions/updates/insert.html)
+```sql
+INSERT INTO cd.facilities (facid, name, membercost, guestcost, initialoutlay, monthlymaintenance) VALUES (9, 'Spa', 20, 30, 100000, 800);
+```
+
+###### [Questions 2](https://pgexercises.com/questions/updates/insert3.html)
+```sql
+insert into cd.facilities
+    (facid, name, membercost, guestcost, initialoutlay, monthlymaintenance) SELECT (SELECT max(facid) from cd.facilities)+1, 'Spa', 20, 30, 100000, 800; 
+```
+
+###### [Question 3](https://pgexercises.com/questions/updates/update.html)
+```sql
+UPDATE cd.facilities SET initialoutlay = 10000 WHERE facid = 1;
+```
+
+###### [Question 4](https://pgexercises.com/questions/updates/updatecalculated.html)
+```sql
+UPDATE cd.facilities
+SET 
+	membercost = (SELECT membercost*1.1 FROM cd.facilities WHERE facid = 0),
+	guestcost = (SELECT guestcost*1.1 FROM cd.facilities WHERE facid = 0)
+WHERE facid = 1;
+```
+
+###### [Question 5](https://pgexercises.com/questions/updates/delete.html)
+```sql
+DELETE FROM cd.bookings;
+```
+
+###### [Question 6](https://pgexercises.com/questions/updates/deletewh.html)
+```sql
+DELETE FROM cd.members WHERE memid = 37;
+```
+
+##### Basics Section
+###### [Question 1](https://pgexercises.com/questions/basic/where2.html)
+```sql
+SELECT facid, name, membercost, monthlymaintenance
+FROM cd.facilities
+WHERE membercost > 0 AND membercost < monthlymaintenance/50;
+```
+
+###### [Question 2](https://pgexercises.com/questions/basic/where3.html)
+```sql
+SELECT *
+FROM cd.facilities
+WHERE name LIKE '%Tennis%';
+```
+
+###### [Question 3](https://pgexercises.com/questions/basic/where4.html)
+```sql
+SELECT *
+FROM cd.facilities
+WHERE facid IN (1, 5);
+```
+
+###### [Question 4](https://pgexercises.com/questions/basic/date.html)
+```sql
+SELECT memid, surname, firstname, joindate
+FROM cd.members
+WHERE joindate >= '2012-09-01';
+```
+
+###### [Question 5](https://pgexercises.com/questions/basic/union.html)
+```sql
+SELECT surname
+FROM cd.members
+UNION
+SELECT name
+FROM cd.facilities;
+```
+
+
+##### Join Section
+###### [Question 1](https://pgexercises.com/questions/joins/simplejoin.html)
+```sql
+SELECT starttime
+FROM cd.bookings
+JOIN cd.members
+ON cd.members.memid = cd.bookings.memid
+WHERE cd.members.firstname = 'David' AND cd.members.surname = 'Farrell';
+```
+
+###### [Question 2](https://pgexercises.com/questions/joins/simplejoin2.html)
+```sql
+SELECT bks.starttime as start, facs.name as name
+FROM cd.bookings as bks
+JOIN cd.facilities as facs
+ON bks.facid = facs.facid
+WHERE facs.name in ('Tennis Court 2','Tennis Court 1') AND bks.starttime >= '2012-09-21' AND bks.starttime < '2012-09-22'
+ORDER BY bks.starttime;
+```
+
+###### [Question 3](https://pgexercises.com/questions/joins/self2.html)
+```sql
+SELECT mem.firstname as memfname, mem.surname as memsname, ref.firstname as recfname, ref.surname as recsname
+FROM cd.members as mem
+LEFT JOIN cd.members as ref
+ON ref.memid = mem.recommendedby
+ORDER BY memsname, memfname;
+```
+
+###### [Question 4](https://pgexercises.com/questions/joins/self.html)
+```sql
+SELECT DISTINCT ref.firstname as firstname, ref.surname as surname
+FROM cd.members as ref
+JOIN cd.members as mem
+ON ref.memid = mem.recommendedby
+ORDER BY surname, firstname;
+```
+
+###### [Question 5](https://pgexercises.com/questions/joins/sub.html)
+```sql
+SELECT DISTINCT mems.firstname || ' ' || mems.surname as member,
+(SELECT recs.firstname || ' ' || recs.surname as recommender
+ FROM cd.members as recs
+ WHERE recs.memid = mems.recommendedby)
+FROM cd.members mems
+ORDER BY member;
+```
+
+##### Aggregates Section
+###### [Question 1](https://pgexercises.com/questions/aggregates/count3.html)
+```sql
+SELECT recommendedby, count(*)
+FROM cd.members
+WHERE recommendedby IS NOT NULL
+GROUP BY recommendedby
+ORDER BY recommendedby ASC;
+```
+
+###### [Question 2](https://pgexercises.com/questions/aggregates/fachours.html)
+```sql
+SELECT facid, SUM(slots) as "Total Slots"
+FROM cd.bookings
+GROUP BY facid
+ORDER BY facid;    
+```
+
+###### [Question 3](https://pgexercises.com/questions/aggregates/fachoursbymonth.html)
+```sql
+SELECT facid, SUM(slots) as "Total Slots"
+FROM cd.bookings
+WHERE starttime >= '2012-09-01' AND starttime < '2012-10-01'
+GROUP BY facid
+ORDER BY "Total Slots";    
+```
+
+###### [Question 4](https://pgexercises.com/questions/aggregates/fachoursbymonth2.html)
+```sql
+SELECT facid, EXTRACT(month from starttime) as month, SUM(slots) as "Total Slots"
+FROM cd.bookings
+WHERE EXTRACT(year from starttime) = 2012
+GROUP BY facid, month
+ORDER BY facid, month;
+```
+
+###### [Question 5](https://pgexercises.com/questions/aggregates/members1.html)
+```sql
+SELECT count(distinct memid) from cd.bookings;
+```
+
+###### [Question 6](https://pgexercises.com/questions/aggregates/nbooking.html)
+```sql
+SELECT mem.surname, mem.firstname, mem.memid, min(bks.starttime) as starttime
+FROM cd.members as mem
+JOIN cd.bookings as bks
+ON mem.memid = bks.memid
+WHERE starttime >= '2012-09-01'
+GROUP by mem.surname, mem.firstname, mem.memid
+ORDER BY mem.memid;
+```
+
+###### [Question 7](https://pgexercises.com/questions/aggregates/countmembers.html)
+```sql
+SELECT COUNT(*) over(), firstname, surname
+FROM cd.members
+ORDER BY joindate;
+```
+
+###### [Question 8](https://pgexercises.com/questions/aggregates/nummembers.html)
+```sql
+SELECT row_number() over(), firstname, surname
+FROM cd.members
+ORDER BY joindate;
+```
+
+###### [Question 9](https://pgexercises.com/questions/aggregates/fachours4.html)
+```sql
+SELECT facid, total FROM (
+  SELECT facid, sum(slots) total, rank() over (ORDER BY sum(slots) DESC) rank
+  from cd.bookings
+  GROUP BY facid
+) as ranked
+WHERE rank = 1; 
+```
+
+
+##### String Section
+###### [Question 1](https://pgexercises.com/questions/string/concat.html)
+```sql
+SELECT surname || ', ' || firstname as name FROM cd.members;
+```
+
+###### [Question 2](https://pgexercises.com/questions/string/reg.html)
+```sql
+SELECT memid, telephone from cd.members where telephone ~ '[()]';
+```
+
+###### [Question 3](https://pgexercises.com/questions/string/substr.html)
+```sql
+SELECT substr(mems.surname, 1, 1) as letter, count(*) as count
+FROM cd.members as mems
+GROUP BY letter
+ORDER BY letter;
+```
